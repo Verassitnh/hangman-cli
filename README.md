@@ -24,7 +24,7 @@ $ 'export PATH=$PATH":$HOME/bin/hangman-cli"' >> .profile
 $ source .profile
 ```
 
-Thats it for installation. To start playing type `hangman`
+Thats it for installation, to start playing type `hangman`
 
 # Usage
 
