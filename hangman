@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+
+import random
+
+from words import word_list
+from clear import clear
+from printer import printer
+from parts import parts
+
+word = random.choice(word_list)
+
+goodLetters = []
+badLetters = []
+show = '__,' * len(word)
+wrong = False
+
+def letter():
+    return input('Type a letter: ')
+
+def main(guessLetter):
+    global wrong 
+    global show
+    printer(wrong, show, badLetters, goodLetters, guessLetter)
+    # Create the guess 
+    guessLetter = letter()
+
+    # Check if the guess is right
+    if guessLetter in word:
+        if guessLetter == word:
+            clear()
+            print('= You win! =\n')
+            print('Want to play again?')
+            return
+        indexOfLetter = word.index(guessLetter)
+        goodLetters.insert(0, guessLetter)
+        show = show.split(',')
+        show[indexOfLetter] = guessLetter
+        show = ','.join(show)
+        wrong = False
+        if not('__,') in show:
+            clear()
+            print('= You win! =\n')
+            print('Want to play again?')
+            return
+    else:
+        if len(badLetters) + 1 >= 8:
+            clear()
+            print('       You loose!')
+            print(parts[8])
+            print('       The word was: ' + word + '\n')
+            return
+
+        badLetters.insert(0, guessLetter)
+        wrong = True
+    main(guessLetter)
+
+main(False)
